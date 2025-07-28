@@ -19,7 +19,20 @@
             min-height: 100vh;
             color: #333;
             line-height: 1.6;
-            gap: 20px; /* ระยะห่างระหว่าง container */
+            gap: 15px;
+        }
+        
+        .title-container {
+            text-align: center;
+            width: 90%;
+            max-width: 800px;
+            margin-bottom: -10px;
+        }
+        
+        h1 {
+            color: #0066CC;
+            font-size: 28px;
+            margin: 0;
         }
         
         .privacy-container {
@@ -31,24 +44,6 @@
             width: 90%;
             max-height: 70vh;
             overflow-y: auto;
-        }
-        
-        .button-container {
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            width: 800px;
-            max-width: 90%;
-            display: flex;
-            justify-content: center;
-        }
-        
-        h1 {
-            color: #0066CC;
-            text-align: center;
-            margin-bottom: 25px;
-            font-size: 28px;
         }
         
         h2 {
@@ -95,6 +90,14 @@
             background: #0052a3;
         }
         
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+            width: 90%;
+            max-width: 800px;
+        }
+        
         .add-friend-btn {
             background-color: #00B900; /* LINE green */
             color: white;
@@ -106,7 +109,8 @@
             cursor: pointer;
             box-shadow: 0 4px 8px rgba(0, 185, 0, 0.2);
             transition: all 0.3s ease;
-            width: 200px;
+            width: 100%;
+            max-width: 200px;
         }
         
         .add-friend-btn:hover {
@@ -133,10 +137,13 @@
     </style>
 </head>
 <body>
-    <!-- Container สำหรับนโยบายความเป็นส่วนตัว -->
-    <div class="privacy-container">
+    <!-- แยกส่วนหัวเรื่องออกมาจาก container -->
+    <div class="title-container">
         <h1>นโยบายความเป็นส่วนตัว</h1>
-        
+    </div>
+    
+    <!-- Container สำหรับเนื้อหานโยบาย -->
+    <div class="privacy-container">
         <p>เราขอขอบคุณที่คุณใช้บริการของบอทนี้ นโยบายนี้อธิบายถึงวิธีที่เรารวบรวม ใช้ และปกป้องข้อมูลส่วนบุคคลของคุณ</p>
         
         <h2>1. ข้อมูลที่เราเก็บ</h2>
@@ -171,7 +178,7 @@
         <p><strong>อัปเดตล่าสุด:</strong> 27 กรกฎาคม 2025</p>
     </div>
     
-    <!-- Container แยกสำหรับปุ่มเพิ่มเพื่อน -->
+    <!-- Container สำหรับปุ่มเพิ่มเพื่อน -->
     <div class="button-container">
         <button class="add-friend-btn" id="addFriendBtn" onclick="addFriend()">
             เพิ่มเพื่อน
