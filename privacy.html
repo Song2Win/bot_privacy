@@ -105,6 +105,23 @@
             background-color: #00A500;
             transform: translateY(-2px);
         }
+
+        /* Loading spinner */
+        .spinner {
+            display: none;
+            border: 3px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 3px solid #00B900;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -145,35 +162,67 @@
         <p><strong>อัปเดตล่าสุด:</strong> 27 กรกฎาคม 2025</p>
         
         <div class="button-container">
-            <button class="add-friend-btn" onclick="addFriend()">เพิ่มเพื่อน</button>
+            <button class="add-friend-btn" id="addFriendBtn" onclick="addFriend()">
+                เพิ่มเพื่อน
+                <span class="spinner" id="spinner"></span>
+            </button>
         </div>
     </div>
     
     <script>
-        // Initialize LIFF
-        liff.init({
-            liffId: '2007002607-5Q82OXzJ' // ใส่ LIFF ID ของคุณที่นี่
-        })
-        .then(() => {
-            console.log('LIFF initialized');
-        })
-        .catch((err) => {
-            console.error('LIFF initialization failed', err);
+        // ตรวจสอบว่า LIFF SDK โหลดแล้วหรือยัง
+        document.addEventListener('DOMContentLoaded', async () => {
+            // ตรวจสอบว่ามี LIFF SDK หรือไม่
+            if (typeof liff === 'undefined') {
+                console.error('LIFF SDK is not loaded');
+                return;
+            }
+            
+            try {
+                await liff.init({ liffId: '2007002607-5Q82OXzJ' });
+                console.log('LIFF initialized successfully');
+            } catch (err) {
+                console.error('LIFF initialization error:', err);
+            }
         });
-    
-        function addFriend() {
-            // ตรวจสอบว่า LIFF ถูก initialize แล้ว
-            if (!liff.isInClient()) {
-                // ถ้าเปิดในเบราว์เซอร์ปกติ
+
+        async function addFriend() {
+            const btn = document.getElementById('addFriendBtn');
+            const spinner = document.getElementById('spinner');
+            
+            try {
+                // แสดง loading spinner
+                btn.disabled = true;
+                spinner.style.display = 'inline-block';
+                
+                // ตรวจสอบว่า LIFF พร้อมใช้งานหรือไม่
+                if (typeof liff === 'undefined' || !liff.isInitialized()) {
+                    console.log('LIFF not available, opening in browser');
+                    window.open('https://line.me/R/ti/p/@052zbuuh', '_blank');
+                    return;
+                }
+                
+                // ตรวจสอบว่าอยู่ในแอป LINE หรือไม่
+                if (liff.isInClient()) {
+                    await liff.openWindow({
+                        url: 'https://line.me/R/ti/p/@052zbuuh',
+                        external: true
+                    });
+                } else {
+                    window.open('https://line.me/R/ti/p/@052zbuuh', '_blank');
+                }
+            } catch (err) {
+                console.error('Error in addFriend:', err);
                 window.open('https://line.me/R/ti/p/@052zbuuh', '_blank');
-            } else {
-                // ถ้าเปิดในแอป LINE
-                liff.openWindow({
-                    url: 'https://line.me/R/ti/p/@052zbuuh',
-                    external: true
-                });
+            } finally {
+                // ซ่อน loading spinner
+                btn.disabled = false;
+                spinner.style.display = 'none';
             }
         }
     </script>
+    
+    <!-- เพิ่ม LIFF SDK -->
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 </body>
 </html>
