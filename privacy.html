@@ -108,32 +108,32 @@
   </div>
 
   <script>
-    const liffId = "2007002607-5Q82OXzJ"; // 🔁 เปลี่ยนเป็น LIFF ID ของคุณ
+    const liffId = "2007002607-5Q82OXzJ";
     let liffReady = false;
 
-    // เริ่มต้น LIFF
     liff.init({ liffId })
-      .then(() => {
-        liffReady = true;
-      })
+      .then(() => liffReady = true)
       .catch(err => {
         alert("ไม่สามารถโหลด LIFF ได้: " + err.message);
       });
 
     async function addFriend() {
+      if (!liffReady) {
+        alert("LIFF ยังไม่พร้อม กรุณารอสักครู่");
+        return;
+      }
+
+      if (!liff.isInClient()) {
+        alert("กรุณาเปิดหน้านี้ในแอป LINE เท่านั้น");
+        return;
+      }
+
+      if (typeof liff.addFriend !== 'function') {
+        alert("ฟังก์ชัน addFriend ไม่สามารถใช้งานได้ กรุณาเช็กว่าเปิด Bot link และใช้ใน LINE App");
+        return;
+      }
+
       try {
-        await liff.init({ liffId: "2007002607-5Q82OXzJ" });
-    
-        if (!liff.isInClient()) {
-          alert("กรุณาเปิดหน้านี้ในแอป LINE เท่านั้น");
-          return;
-        }
-    
-        if (typeof liff.addFriend !== 'function') {
-          alert("ฟังก์ชัน addFriend ไม่สามารถใช้งานได้ กรุณาเช็กว่าเปิด Bot link และใช้ใน LINE App");
-          return;
-        }
-    
         await liff.addFriend();
         alert("เพิ่มเพื่อนสำเร็จแล้ว ✅");
         liff.closeWindow();
