@@ -1,96 +1,160 @@
 <!DOCTYPE html>
-<html lang="th">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Test addFriend</title>
-
-  <!-- ✅ LINE Seed Sans TH -->
-  <link href="https://cdn.jsdelivr.net/gh/phichet-dev/line-seed-font@main/line-seed-th.css" rel="stylesheet" />
-
-  <!-- ✅ LIFF SDK -->
-  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-
-  <style>
-    body {
-      font-family: 'LINE Seed Sans TH', sans-serif;
-      background-color: #e3f2fd;
-      margin: 0;
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    button {
-      padding: 1rem 2rem;
-      font-size: 1.2rem;
-      background-color: #00c300;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 2rem;
-    }
-    #status {
-      margin-top: 2rem;
-      color: #333;
-      font-size: 1rem;
-      text-align: center;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>นโยบายความเป็นส่วนตัว</title>
+    <style>
+        @import url('https://fonts.line.me/css2?family=LINE+Seed+Sans+TH:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'LINE Seed Sans TH', sans-serif;
+            background-color: #E6F2FF; /* Pastel blue background */
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .privacy-container {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        h1 {
+            color: #0066CC;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 28px;
+        }
+        
+        h2 {
+            color: #0066CC;
+            margin-top: 25px;
+            font-size: 20px;
+            border-bottom: 2px solid #E6F2FF;
+            padding-bottom: 5px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        strong {
+            color: #0066CC;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #0066CC;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0052a3;
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .add-friend-btn {
+            background-color: #00B900; /* LINE green */
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-family: 'LINE Seed Sans TH', sans-serif;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 185, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .add-friend-btn:hover {
+            background-color: #00A500;
+            transform: translateY(-2px);
+        }
+    </style>
 </head>
 <body>
-  <h1>ทดสอบ addFriend()</h1>
-  <button onclick="testAddFriend()">✅ เพิ่มเพื่อน</button>
-  <div id="status">กำลังโหลด LIFF...</div>
-
-  <script>
-    const liffId = "2007002607-5Q82OXzJ"; // 🔁 เปลี่ยนเป็น LIFF ID ของคุณ
-
-    let liffReady = false;
-
-    async function initLIFF() {
-      try {
-        await liff.init({ liffId });
-        liffReady = true;
-
-        console.log("✅ LIFF Initialized");
-        console.log("liff.addFriend is:", typeof liff.addFriend);
-
-        document.getElementById('status').innerText = 'LIFF พร้อมแล้ว ✅';
-      } catch (err) {
-        console.error("❌ LIFF init error:", err);
-        document.getElementById('status').innerText = '❌ ไม่สามารถโหลด LIFF ได้: ' + err.message;
-      }
-    }
-
-    async function testAddFriend() {
-      if (!liffReady) {
-        alert("LIFF ยังไม่พร้อม กรุณารอสักครู่");
-        return;
-      }
-
-      if (!liff.isInClient()) {
-        alert("กรุณาเปิดหน้านี้ในแอป LINE เท่านั้น");
-        return;
-      }
-
-      if (typeof liff.addFriend !== 'function') {
-        alert("❌ ฟังก์ชัน addFriend ไม่รองรับใน LIFF นี้");
-        return;
-      }
-
-      try {
-        await liff.addFriend();
-        alert("✅ เพิ่มเพื่อนสำเร็จแล้ว");
-        liff.closeWindow();
-      } catch (err) {
-        console.error("❌ Add friend error:", err);
-        alert("เกิดข้อผิดพลาด: " + err.message);
-      }
-    }
-
-    initLIFF();
-  </script>
+    <div class="privacy-container">
+        <h1>นโยบายความเป็นส่วนตัว</h1>
+        
+        <p>เราขอขอบคุณที่คุณใช้บริการของบอทนี้ นโยบายนี้อธิบายถึงวิธีที่เรารวบรวม ใช้ และปกป้องข้อมูลส่วนบุคคลของคุณ</p>
+        
+        <h2>1. ข้อมูลที่เราเก็บ</h2>
+        <p>เราอาจเก็บข้อมูลต่อไปนี้:</p>
+        <ul>
+            <li>ชื่อผู้ใช้งานใน LINE (displayName)</li>
+            <li>LINE user ID</li>
+            <li>ข้อความหรือคำตอบที่คุณส่งผ่านบอท</li>
+            <li>คำตอบจากแบบฟอร์มหรือการคลิกปุ่มต่าง ๆ</li>
+        </ul>
+        
+        <h2>2. วัตถุประสงค์ของการใช้ข้อมูล</h2>
+        <p>ข้อมูลที่เรารวบรวมจะถูกนำไปใช้เพื่อ:</p>
+        <ul>
+            <li>ตอบกลับข้อความของคุณอย่างเหมาะสม</li>
+            <li>ปรับปรุงประสบการณ์การใช้งานบอท</li>
+            <li>เก็บสถิติการใช้งานเพื่อพัฒนาเพิ่มเติม</li>
+        </ul>
+        
+        <h2>3. การจัดเก็บและการรักษาความปลอดภัย</h2>
+        <p>ข้อมูลทั้งหมดจะถูกเก็บไว้ใน Google Sheets หรือฐานข้อมูลที่ปลอดภัย และจะไม่เปิดเผยต่อบุคคลที่สาม</p>
+        
+        <h2>4. การแบ่งปันข้อมูล</h2>
+        <p>เราไม่ขาย แลกเปลี่ยน หรือถ่ายโอนข้อมูลส่วนตัวของคุณไปยังบุคคลภายนอก ยกเว้นในกรณีที่จำเป็นต้องใช้เพื่อวัตถุประสงค์ทางกฎหมาย</p>
+        
+        <h2>5. สิทธิของผู้ใช้</h2>
+        <p>คุณสามารถร้องขอให้ลบข้อมูลของคุณได้ตลอดเวลาโดยติดต่อผู้ดูแลระบบ</p>
+        
+        <h2>6. การเปลี่ยนแปลงนโยบาย</h2>
+        <p>เราขอสงวนสิทธิ์ในการปรับปรุงนโยบายนี้โดยไม่ต้องแจ้งให้ทราบล่วงหน้า โดยเวอร์ชันล่าสุดจะปรากฏในหน้านี้</p>
+        
+        <p><strong>อัปเดตล่าสุด:</strong> 27 กรกฎาคม 2025</p>
+        
+        <div class="button-container">
+            <button class="add-friend-btn" onclick="addFriend()">เพิ่มเพื่อน</button>
+        </div>
+    </div>
+    
+    <script>
+        function addFriend() {
+            // ใส่โค้ดสำหรับเพิ่มเพื่อนที่นี่
+            liff.openWindow({ url: 'https://line.me/R/ti/p/@052zbuuh' });
+            alert('ระบบกำลังพาคุณไปยังหน้าค้นหาเพื่อน');
+        }
+    </script>
 </body>
 </html>
