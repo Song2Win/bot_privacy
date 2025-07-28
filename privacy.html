@@ -5,8 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>นโยบายความเป็นส่วนตัว</title>
 
-  <!-- ✅ โหลดฟอนต์ LINE Seed Sans TH จาก CDN -->
+  <!-- ✅ LINE Seed Sans TH -->
   <link href="https://cdn.jsdelivr.net/gh/phichet-dev/line-seed-font@main/line-seed-th.css" rel="stylesheet" />
+
+  <!-- ✅ LIFF SDK -->
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 
   <style>
     :root {
@@ -49,6 +52,18 @@
     }
     ul {
       padding-left: 1.5rem;
+    }
+    button {
+      display: block;
+      margin: 2rem auto 0 auto;
+      padding: 0.8rem 2rem;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 8px;
+      background-color: #00c300;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
   </style>
 </head>
@@ -93,17 +108,36 @@
   </div>
 
   <script>
+    const liffId = "2007002607-5Q82OXzJ"; // 🔁 เปลี่ยนเป็น LIFF ID ของคุณ
+    let liffReady = false;
+
+    // เริ่มต้น LIFF
+    liff.init({ liffId })
+      .then(() => {
+        liffReady = true;
+      })
+      .catch(err => {
+        alert("ไม่สามารถโหลด LIFF ได้: " + err.message);
+      });
+
     async function addFriend() {
-      await liff.init({ liffId: "2007002607-5Q82OXzJ" }); // 🔁 เปลี่ยนตรงนี้
+      if (!liffReady) {
+        alert("LIFF ยังไม่พร้อม กรุณารอสักครู่");
+        return;
+      }
+
       if (!liff.isInClient()) {
-        alert("กรุณาเปิดหน้านี้ในแอป LINE");
+        const addUrl = "https://line.me/R/oaMessage/@980hsrlu/?"; // ❗ ใส่ LINE @id ของคุณ
+        if (confirm("กรุณาเปิดหน้านี้ในแอป LINE หรือกด OK เพื่อเพิ่มเพื่อนด้วยตนเอง")) {
+          window.location.href = addUrl;
+        }
         return;
       }
 
       try {
-        await liff.addFriend(); // ✅ เพิ่มบอทเป็นเพื่อน
+        await liff.addFriend();
         alert("เพิ่มเพื่อนสำเร็จแล้ว ขอบคุณที่ยอมรับนโยบาย 😊");
-        liff.closeWindow(); // ปิดหน้าต่าง
+        liff.closeWindow();
       } catch (err) {
         alert("เกิดข้อผิดพลาด: " + err.message);
       }
