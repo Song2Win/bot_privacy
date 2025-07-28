@@ -1,146 +1,33 @@
 <!DOCTYPE html>
-<html lang="th">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>นโยบายความเป็นส่วนตัว</title>
-
-  <!-- ✅ LINE Seed Sans TH -->
-  <link href="https://cdn.jsdelivr.net/gh/phichet-dev/line-seed-font@main/line-seed-th.css" rel="stylesheet" />
-
-  <!-- ✅ LIFF SDK -->
-  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-
-  <style>
-    :root {
-      --pastel-blue: #e3f2fd;
-    }
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: var(--pastel-blue);
-      font-family: 'LINE Seed Sans TH', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
-    }
-    .container {
-      background-color: white;
-      margin: 2rem 1rem;
-      padding: 2rem;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      max-width: 800px;
-      max-height: 90vh;
-      overflow-y: auto;
-    }
-    h1 {
-      color: #0d47a1;
-      font-size: 1.8rem;
-    }
-    h2 {
-      margin-top: 1.5rem;
-      color: #1565c0;
-      font-size: 1.3rem;
-    }
-    p, li {
-      line-height: 1.7;
-      margin: 1rem 0;
-      color: #333;
-      font-size: 1rem;
-    }
-    ul {
-      padding-left: 1.5rem;
-    }
-    button {
-      display: block;
-      margin: 2rem auto 0 auto;
-      padding: 0.8rem 2rem;
-      font-size: 1.1rem;
-      border: none;
-      border-radius: 8px;
-      background-color: #00c300;
-      color: white;
-      cursor: pointer;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-  </style>
-</head>
+<html>
+<head><title>Test addFriend</title></head>
 <body>
-  <div class="container">
-    <h1>นโยบายความเป็นส่วนตัว</h1>
+<button id="btn">Add Friend</button>
 
-    <p>เราขอขอบคุณที่คุณใช้บริการของบอทนี้ นโยบายนี้อธิบายถึงวิธีที่เรารวบรวม ใช้ และปกป้องข้อมูลส่วนบุคคลของคุณ</p>
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+<script>
+  const liffId = '2007002607-5Q82OXzJ';  // เปลี่ยนเป็น LIFF ID จริง
 
-    <h2>1. ข้อมูลที่เราเก็บ</h2>
-    <p>เราอาจเก็บข้อมูลต่อไปนี้:</p>
-    <ul>
-      <li>ชื่อผู้ใช้งานใน LINE (displayName)</li>
-      <li>LINE user ID</li>
-      <li>ข้อความหรือคำตอบที่คุณส่งผ่านบอท</li>
-      <li>คำตอบจากแบบฟอร์มหรือการคลิกปุ่มต่าง ๆ</li>
-    </ul>
-
-    <h2>2. วัตถุประสงค์ของการใช้ข้อมูล</h2>
-    <p>ข้อมูลที่เรารวบรวมจะถูกนำไปใช้เพื่อ:</p>
-    <ul>
-      <li>ตอบกลับข้อความของคุณอย่างเหมาะสม</li>
-      <li>ปรับปรุงประสบการณ์การใช้งานบอท</li>
-      <li>เก็บสถิติการใช้งานเพื่อพัฒนาเพิ่มเติม</li>
-    </ul>
-
-    <h2>3. การจัดเก็บและการรักษาความปลอดภัย</h2>
-    <p>ข้อมูลทั้งหมดจะถูกเก็บไว้ใน Google Sheets หรือฐานข้อมูลที่ปลอดภัย และจะไม่เปิดเผยต่อบุคคลที่สาม</p>
-
-    <h2>4. การแบ่งปันข้อมูล</h2>
-    <p>เราไม่ขาย แลกเปลี่ยน หรือถ่ายโอนข้อมูลส่วนตัวของคุณไปยังบุคคลภายนอก ยกเว้นในกรณีที่จำเป็นต้องใช้เพื่อวัตถุประสงค์ทางกฎหมาย</p>
-
-    <h2>5. สิทธิของผู้ใช้</h2>
-    <p>คุณสามารถร้องขอให้ลบข้อมูลของคุณได้ตลอดเวลาโดยติดต่อผู้ดูแลระบบ</p>
-
-    <h2>6. การเปลี่ยนแปลงนโยบาย</h2>
-    <p>เราขอสงวนสิทธิ์ในการปรับปรุงนโยบายนี้โดยไม่ต้องแจ้งให้ทราบล่วงหน้า โดยเวอร์ชันล่าสุดจะปรากฏในหน้านี้</p>
-
-    <p><strong>อัปเดตล่าสุด:</strong> 27 กรกฎาคม 2025</p>
-
-    <button onclick="addFriend()">✅ ยอมรับและเพิ่มเพื่อน</button>
-  </div>
-
-  <script>
-    const liffId = "2007002607-5Q82OXzJ";
-    let liffReady = false;
-
-    liff.init({ liffId })
-      .then(() => liffReady = true)
-      .catch(err => {
-        alert("ไม่สามารถโหลด LIFF ได้: " + err.message);
+  liff.init({ liffId })
+    .then(() => {
+      document.getElementById('btn').addEventListener('click', async () => {
+        if (!liff.isInClient()) {
+          alert('กรุณาเปิดในแอป LINE เท่านั้น');
+          return;
+        }
+        if (typeof liff.addFriend !== 'function') {
+          alert('addFriend() ไม่รองรับในเวอร์ชันนี้');
+          return;
+        }
+        try {
+          await liff.addFriend();
+          alert('เพิ่มเพื่อนสำเร็จ');
+        } catch (e) {
+          alert('Error: ' + e.message);
+        }
       });
-
-    async function addFriend() {
-      if (!liffReady) {
-        alert("LIFF ยังไม่พร้อม กรุณารอสักครู่");
-        return;
-      }
-
-      if (!liff.isInClient()) {
-        alert("กรุณาเปิดหน้านี้ในแอป LINE เท่านั้น");
-        return;
-      }
-
-      if (typeof liff.addFriend !== 'function') {
-        alert("ฟังก์ชัน addFriend ไม่สามารถใช้งานได้ กรุณาเช็กว่าเปิด Bot link และใช้ใน LINE App");
-        return;
-      }
-
-      try {
-        await liff.addFriend();
-        alert("เพิ่มเพื่อนสำเร็จแล้ว ✅");
-        liff.closeWindow();
-      } catch (err) {
-        alert("เกิดข้อผิดพลาด: " + err.message);
-      }
-    }
-  </script>
+    })
+    .catch(err => alert('LIFF init error: ' + err.message));
+</script>
 </body>
 </html>
