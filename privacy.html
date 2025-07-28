@@ -150,10 +150,29 @@
     </div>
     
     <script>
+        // Initialize LIFF
+        liff.init({
+            liffId: '2007002607-5Q82OXzJ' // ใส่ LIFF ID ของคุณที่นี่
+        })
+        .then(() => {
+            console.log('LIFF initialized');
+        })
+        .catch((err) => {
+            console.error('LIFF initialization failed', err);
+        });
+    
         function addFriend() {
-            // ใส่โค้ดสำหรับเพิ่มเพื่อนที่นี่
-            liff.openWindow({ url: 'https://line.me/R/ti/p/@052zbuuh' });
-            alert('ระบบกำลังพาคุณไปยังหน้าค้นหาเพื่อน');
+            // ตรวจสอบว่า LIFF ถูก initialize แล้ว
+            if (!liff.isInClient()) {
+                // ถ้าเปิดในเบราว์เซอร์ปกติ
+                window.open('https://line.me/R/ti/p/@052zbuuh', '_blank');
+            } else {
+                // ถ้าเปิดในแอป LINE
+                liff.openWindow({
+                    url: 'https://line.me/R/ti/p/@052zbuuh',
+                    external: true
+                });
+            }
         }
     </script>
 </body>
