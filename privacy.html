@@ -6,38 +6,38 @@
     <title>นโยบายความเป็นส่วนตัว</title>
     <style>
         :root {
-          --pastel-blue: #0066CC;
-          --pastel-blue-light: #E6F2FF;
-          --pastel-blue-dark: #0052a3;
+            --pastel-blue: #0066CC;
+            --pastel-blue-light: #E6F2FF;
+            --pastel-blue-dark: #0052a3;
         }
-        
+
         body {
-          font-family: 'Segoe UI', sans-serif;
-          background-color: var(--pastel-blue-light);
-          margin: 0;
-          padding: 20px;
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-start; /* เปลี่ยนจาก center → ชิดบน */
-          align-items: center;
-          min-height: 100vh;
-          gap: 15px;
-          padding-top: 30px; /* เพิ่มระยะห่างเล็กน้อยจากขอบบน */
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--pastel-blue-light);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            min-height: 100vh;
+            gap: 15px;
+            padding-top: 30px;
         }
-        
+
         .title-container {
             text-align: center;
             width: 90%;
             max-width: 800px;
             margin-bottom: 5px;
         }
-        
+
         h1 {
             color: var(--pastel-blue);
             font-size: 24px;
             margin: 0;
         }
-        
+
         .privacy-container {
             background-color: white;
             border-radius: 15px;
@@ -48,7 +48,7 @@
             max-height: 65vh;
             overflow-y: auto;
         }
-        
+
         h2 {
             color: var(--pastel-blue);
             margin-top: 15px;
@@ -56,44 +56,43 @@
             border-bottom: 2px solid #E6F2FF;
             padding-bottom: 5px;
         }
-        
+
         p {
             margin-top: 5px;
             margin-bottom: 10px;
         }
-        
+
         ul {
             padding-left: 20px;
             margin-bottom: 15px;
         }
-        
+
         li {
             margin-bottom: 5px;
         }
-        
+
         strong {
             color: var(--pastel-blue);
         }
-        
-        /* Custom scrollbar */
+
         ::-webkit-scrollbar {
             width: 8px;
         }
-        
+
         ::-webkit-scrollbar-track {
             background: #f1f1f1;
             border-radius: 10px;
         }
-        
+
         ::-webkit-scrollbar-thumb {
             background: var(--pastel-blue);
             border-radius: 10px;
         }
-        
+
         ::-webkit-scrollbar-thumb:hover {
             background: var(--pastel-blue-dark);
         }
-        
+
         .button-container {
             display: flex;
             justify-content: center;
@@ -101,9 +100,9 @@
             width: 90%;
             max-width: 800px;
         }
-        
+
         .add-friend-btn {
-            background-color: #00B900; /* LINE green */
+            background-color: #00B900;
             color: white;
             border: none;
             padding: 12px 25px;
@@ -115,16 +114,20 @@
             transition: all 0.3s ease;
             width: 100%;
             max-width: 200px;
-            -webkit-tap-highlight-color: transparent; /* สำหรับ Android/Chrome */
-            touch-action: manipulation; /* ลด delay ในการแตะ */
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
-        
-        .add-friend-btn:hover {
+
+        .add-friend-btn:hover:enabled {
             background-color: #00A500;
             transform: translateY(-2px);
         }
 
-        /* Loading spinner */
+        .add-friend-btn:disabled {
+            background-color: #bfbfbf;
+            cursor: not-allowed;
+        }
+
         .spinner {
             display: none;
             border: 3px solid rgba(0, 0, 0, 0.1);
@@ -140,18 +143,21 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        .consent-checkbox {
+            margin-top: 20px;
+            font-size: 15px;
+        }
     </style>
 </head>
 <body>
-    <!-- แยกส่วนหัวเรื่องออกมาจาก container -->
     <div class="title-container">
         <h1>นโยบายความเป็นส่วนตัว</h1>
     </div>
-    
-    <!-- Container สำหรับเนื้อหานโยบาย -->
+
     <div class="privacy-container">
         <p>เราขอขอบคุณที่คุณใช้บริการของบอทนี้ นโยบายนี้อธิบายถึงวิธีที่เรารวบรวม ใช้ และปกป้องข้อมูลส่วนบุคคลของคุณ</p>
-        
+
         <h2>1. ข้อมูลที่เราเก็บ</h2>
         <p>เราอาจเก็บข้อมูลต่อไปนี้:</p>
         <ul>
@@ -160,7 +166,7 @@
             <li>ข้อความหรือคำตอบที่คุณส่งผ่านบอท</li>
             <li>คำตอบจากแบบฟอร์มหรือการคลิกปุ่มต่าง ๆ</li>
         </ul>
-        
+
         <h2>2. วัตถุประสงค์ของการใช้ข้อมูล</h2>
         <p>ข้อมูลที่เรารวบรวมจะถูกนำไปใช้เพื่อ:</p>
         <ul>
@@ -168,39 +174,55 @@
             <li>ปรับปรุงประสบการณ์การใช้งานบอท</li>
             <li>เก็บสถิติการใช้งานเพื่อพัฒนาเพิ่มเติม</li>
         </ul>
-        
+
         <h2>3. การจัดเก็บและการรักษาความปลอดภัย</h2>
         <p>ข้อมูลทั้งหมดจะถูกเก็บไว้ใน Google Sheets หรือฐานข้อมูลที่ปลอดภัย และจะไม่เปิดเผยต่อบุคคลที่สาม</p>
-        
+
         <h2>4. การแบ่งปันข้อมูล</h2>
         <p>เราไม่ขาย แลกเปลี่ยน หรือถ่ายโอนข้อมูลส่วนตัวของคุณไปยังบุคคลภายนอก ยกเว้นในกรณีที่จำเป็นต้องใช้เพื่อวัตถุประสงค์ทางกฎหมาย</p>
-        
+
         <h2>5. สิทธิของผู้ใช้</h2>
         <p>คุณสามารถร้องขอให้ลบข้อมูลของคุณได้ตลอดเวลาโดยติดต่อผู้ดูแลระบบ</p>
-        
+
         <h2>6. การเปลี่ยนแปลงนโยบาย</h2>
         <p>เราขอสงวนสิทธิ์ในการปรับปรุงนโยบายนี้โดยไม่ต้องแจ้งให้ทราบล่วงหน้า โดยเวอร์ชันล่าสุดจะปรากฏในหน้านี้</p>
-        
+
         <p><strong>อัปเดตล่าสุด:</strong> 27 กรกฎาคม 2025</p>
+
+        <!-- ✅ Checkbox -->
+        <div class="consent-checkbox">
+            <label>
+                <input type="checkbox" id="consentCheckbox">
+                ยอมรับนโยบายความเป็นส่วนตัว
+            </label>
+        </div>
     </div>
-    
-    <!-- Container สำหรับปุ่มเพิ่มเพื่อน -->
+
     <div class="button-container">
-        <button class="add-friend-btn" id="addFriendBtn" onclick="addFriend()">
+        <button class="add-friend-btn" id="addFriendBtn" onclick="addFriend()" disabled>
             ➕ เพิ่มบอทเป็นเพื่อน
             <span class="spinner" id="spinner"></span>
         </button>
     </div>
-    
+
+    <!-- ✅ LIFF Script -->
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
     <script>
-        // ตรวจสอบว่า LIFF SDK โหลดแล้วหรือยัง
         document.addEventListener('DOMContentLoaded', async () => {
-            // ตรวจสอบว่ามี LIFF SDK หรือไม่
+            // ✅ ตรวจสอบและเปิดปุ่มเมื่อ checkbox ถูกติ๊ก
+            const consentCheckbox = document.getElementById('consentCheckbox');
+            const addFriendBtn = document.getElementById('addFriendBtn');
+
+            consentCheckbox.addEventListener('change', () => {
+                addFriendBtn.disabled = !consentCheckbox.checked;
+            });
+
+            // ✅ LIFF Init
             if (typeof liff === 'undefined') {
                 console.error('LIFF SDK is not loaded');
                 return;
             }
-            
+
             try {
                 await liff.init({ liffId: '2007002607-5Q82OXzJ' });
                 console.log('LIFF initialized successfully');
@@ -212,20 +234,16 @@
         async function addFriend() {
             const btn = document.getElementById('addFriendBtn');
             const spinner = document.getElementById('spinner');
-            
+
             try {
-                // แสดง loading spinner
                 btn.disabled = true;
                 spinner.style.display = 'inline-block';
-                
-                // ตรวจสอบว่า LIFF พร้อมใช้งานหรือไม่
+
                 if (typeof liff === 'undefined' || !liff.isInitialized()) {
-                    console.log('LIFF not available, opening in browser');
                     window.open('https://line.me/R/ti/p/@052zbuuh', '_blank');
                     return;
                 }
-                
-                // ตรวจสอบว่าอยู่ในแอป LINE หรือไม่
+
                 if (liff.isInClient()) {
                     await liff.openWindow({
                         url: 'https://line.me/R/ti/p/@052zbuuh',
@@ -238,14 +256,10 @@
                 console.error('Error in addFriend:', err);
                 window.open('https://line.me/R/ti/p/@052zbuuh', '_blank');
             } finally {
-                // ซ่อน loading spinner
                 btn.disabled = false;
                 spinner.style.display = 'none';
             }
         }
     </script>
-    
-    <!-- เพิ่ม LIFF SDK -->
-    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 </body>
 </html>
