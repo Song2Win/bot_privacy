@@ -148,7 +148,6 @@
 
         .consent-checkbox {
             margin-top: 20px;
-            margin-bottom: 25px; /* ✅ เพิ่มระยะห่างจากปุ่มด้านล่าง */
             font-size: 15px;
         }
     </style>
@@ -194,18 +193,18 @@
     </div>
 
     <div class="button-container">
-        <!-- ✅ Checkbox -->
-        <div class="consent-checkbox">
-            <label>
-                <input type="checkbox" id="consentCheckbox">
-                ยอมรับนโยบายความเป็นส่วนตัว
-            </label>
+        <div style="display: flex; flex-direction: column; align-items: center; width: 100%; gap: 10px;">
+            <div class="consent-checkbox">
+                <label>
+                    <input type="checkbox" id="consentCheckbox">
+                    ยอมรับนโยบายความเป็นส่วนตัว
+                </label>
+            </div>
+            <button class="add-friend-btn" id="addFriendBtn" onclick="addFriend()" disabled>
+                ➕ เพิ่มบอทเป็นเพื่อน
+                <span class="spinner" id="spinner"></span>
+            </button>
         </div>
-        
-        <button class="add-friend-btn" id="addFriendBtn" onclick="addFriend()" disabled>
-            ➕ เพิ่มบอทเป็นเพื่อน
-            <span class="spinner" id="spinner"></span>
-        </button>
     </div>
 
     <!-- ✅ LIFF Script -->
