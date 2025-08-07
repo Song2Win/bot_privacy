@@ -94,14 +94,20 @@
             background: var(--pastel-blue-dark);
         }
 
-        .button-container {
-            display: flex;
-            flex-direction: column; /* ✅ วาง checkbox ด้านบนปุ่ม */
-            align-items: center;
-            gap: 10px;
-            margin-top: 10px;
-            width: 90%;
-            max-width: 800px;
+        .action-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 10px; /* ระยะห่างระหว่าง checkbox กับปุ่ม */
+          margin-top: 20px;
+        }
+        
+        .checkbox-label {
+          display: flex;
+          align-items: center;
+          gap: 8px; /* ระยะห่างระหว่าง checkbox กับข้อความ */
+          font-size: 14px;
+          color: #333;
         }
 
         .add-friend-btn {
@@ -147,11 +153,6 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
-        .consent-checkbox {
-            margin-top: 20px;
-            font-size: 15px;
-        }
     </style>
 </head>
 <body>
@@ -194,19 +195,12 @@
         <p><strong>อัปเดตล่าสุด:</strong> 27 กรกฎาคม 2025</p>
     </div>
 
-    <div class="button-container">
-        <!-- ✅ Checkbox -->
-        <div class="consent-checkbox">
-            <label>
-                <input type="checkbox" id="consentCheckbox">
-                ยอมรับนโยบายความเป็นส่วนตัว
-            </label>
-        </div>
-        
-        <button class="add-friend-btn" id="addFriendBtn" onclick="addFriend()" disabled>
-            ➕ เพิ่มบอทเป็นเพื่อน
-            <span class="spinner" id="spinner"></span>
-        </button>
+    <div class="action-container">
+      <label class="checkbox-label">
+        <input type="checkbox" id="agree" />
+        <span>ฉันยอมรับนโยบายความเป็นส่วนตัว</span>
+      </label>
+      <button class="add-friend-btn" disabled>📥 เพิ่มบอทเป็นเพื่อน</button>
     </div>
 
     <!-- ✅ LIFF Script -->
