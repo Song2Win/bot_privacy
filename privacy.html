@@ -18,11 +18,11 @@
             padding: 20px;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
+            justify-content: flex-start; /* เปลี่ยนจาก center → ชิดบน */
             align-items: center;
             min-height: 100vh;
             gap: 15px;
-            padding-top: 30px;
+            padding-top: 30px; /* เพิ่มระยะห่างเล็กน้อยจากขอบบน */
         }
 
         .title-container {
@@ -75,6 +75,7 @@
             color: var(--pastel-blue);
         }
 
+        /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -114,8 +115,8 @@
             transition: all 0.3s ease;
             width: 100%;
             max-width: 200px;
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent; /* สำหรับ Android/Chrome */
+            touch-action: manipulation; /* ลด delay ในการแตะ */
         }
 
         .add-friend-btn:hover:enabled {
@@ -240,11 +241,13 @@
                 btn.disabled = true;
                 spinner.style.display = 'inline-block';
 
+                // ตรวจสอบว่า LIFF พร้อมใช้งานหรือไม่
                 if (typeof liff === 'undefined' || !liff.isInitialized()) {
                     window.open('https://line.me/R/ti/p/@052zbuuh', '_blank');
                     return;
                 }
 
+                // ตรวจสอบว่าอยู่ในแอป LINE หรือไม่
                 if (liff.isInClient()) {
                     await liff.openWindow({
                         url: 'https://line.me/R/ti/p/@052zbuuh',
